@@ -1,0 +1,51 @@
+<!doctype html>
+<meta charset="utf-8">
+<base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Organized Mom</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7a4f5a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Organized Mom">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="om.css">
+<div class="wrap">
+  <header class="page" style="padding-top:12px">
+    <img src="icons/logo.png" alt="The Organized Mom" style="width:min(300px,78%);height:auto">
+  </header>
+  <section class="hero"><img src="images/michelle.jpg" alt=""><div class="tx"><span class="eyebrow">7 days with Michelle Marie</span><h1>A more organized, productive, healthy, fit and balanced life</h1><p>One day at a time. Everything you write is saved on your phone.</p></div></section>
+  <section id="next"></section>
+  <section id="dots" class="dots"></section>
+  <section id="tonight"></section>
+  <h2 class="also">My plan</h2>
+  <section class="ways">
+    <a class="way" href="week.html"><span class="ic">7</span><span><b>My week</b><small>Daily things, weekly things, workouts, meals, down time. All on one calendar.</small></span></a>
+    <a class="way" href="plan.html"><span class="ic">A</span><span><b>My aspects and goals</b><small>The sheets from Day 1. Top 3 and the plan for each.</small></span></a>
+    <a class="way" href="todos.html"><span class="ic">✓</span><span><b>To-dos and batches</b><small>What I do, what I delegate, what I group together.</small></span></a>
+    <a class="way" href="meals.html"><span class="ic">M</span><span><b>Meals and groceries</b><small>This week's dinners, recipes, the list to tick off in the store.</small></span></a>
+    <a class="way" href="routines.html"><span class="ic">R</span><span><b>Morning and evening routines</b><small>In order. Change them any time.</small></span></a>
+    <a class="way" href="tonight.html"><span class="ic gold">♥</span><span><b>Tonight's note to self</b><small>What I did today. What I'm grateful for.</small></span></a>
+    <a class="way" href="print.html"><span class="ic">P</span><span><b>My plan on one page</b><small>Print it or screenshot it.</small></span></a>
+  </section>
+  <section class="card soft">
+    <h3>Put it on your home screen</h3>
+    <p>Then it opens like an app, full screen, with its own icon.</p>
+    <a href="install.html" style="font-weight:600;color:var(--brand)">Show me how, with pictures →</a>
+  </section>
+  <p class="note" style="text-align:center">The 7 days are a one-time setup. After that, this is where your week, meals and routines live. Come back to any day when a season changes.</p>
+</div>
+<script src="om.js"></script>
+<script>
+function render(){
+  const nd=nextDay(), dn=done();
+  const d=DAYS[(nd||7)-1];
+  $('#next').innerHTML=nd?`<div class="card"><span class="eyebrow">${nd===1&&!dn[1]?'Start here':'Next up'}</span><h2>Day ${nd}: ${esc(d.title)}</h2><p>${esc(d.sub)}</p><a class="go" href="day.html#${nd}">${nd===1?'Start Day 1':'Open Day '+nd} →</a></div>`
+    :`<div class="card gold"><span class="eyebrow">All 7 days done</span><h2>Your life is in order.</h2><p>Now it's about keeping it that way. Your week, meals and routines are below. Every night, the note to self.</p><a class="go gold" href="week.html">Open my week →</a></div>`;
+  $('#dots').innerHTML=DAYS.map(x=>`<a href="day.html#${x.n}" class="${dn[x.n]?'done':''} ${x.n===nd?'next':''}"><span class="d">Day</span><span class="n">${x.n}</span></a>`).join('');
+  const h=new Date().getHours(), n=notes()[TODAY];
+  $('#tonight').innerHTML=(h>=18||n)&&dn[7]?`<div class="card ${n?'':'soft'}"><span class="eyebrow">Tonight</span><h3>${n?'Note to self, done ✓':'Your note to self'}</h3><p>${n?esc((n.did||'').split('\n')[0]||'Written.'):'What did you do today? Commend yourself. Be grateful.'}</p><a class="pill" href="tonight.html">${n?'Read it':'Write it'}</a></div>`:'';
+}
+render();
+</script>

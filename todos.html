@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8">
+<base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>To-dos · The Organized Mom</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7a4f5a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Organized Mom">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="om.css">
+<div class="wrap">
+  <header class="page"><a class="back" href="start.html">← Home</a><span class="eyebrow">From Days 2, 3 and 4</span><h1>To-dos, batches, distractions</h1><p class="lead">Delegated to-dos turn gold. The rest get a day and land on your week.</p></header>
+  <section class="card"><h3>To-dos</h3><div id="todos"></div></section>
+  <section class="card"><h3>What I batch</h3><div id="batches"></div></section>
+  <section class="card"><h3>Distractions I'm cutting</h3><div id="distract"></div></section>
+  <section class="card"><h3>My reminders</h3><p>Set each one in your phone's Clock app, repeating weekly. This list is so you remember what you set.</p><div id="reminders"></div></section>
+</div>
+<script src="om.js"></script>
+<script>renderWS('todos',$('#todos'));renderWS('batches',$('#batches'));renderWS('distract',$('#distract'));renderWS('reminders',$('#reminders'));</script>

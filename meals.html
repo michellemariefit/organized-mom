@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8">
+<base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meals · The Organized Mom</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7a4f5a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Organized Mom">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="om.css">
+<div class="wrap">
+  <header class="page"><a class="back" href="start.html">← Home</a><span class="eyebrow">From Day 5</span><h1>Meals and groceries</h1><p class="lead">Protein, carb, vegetable, every night. Clear the dinners on meal planning day and start again.</p></header>
+  <section class="card"><h3>Grocery list</h3><div id="grocery"></div><div class="toolrow"><button class="pill" id="clearDone">Clear ticked items</button></div></section>
+  <section class="card"><h3>This week's dinners</h3><div id="meals"></div><div class="toolrow"><button class="pill" id="clearMeals">Clear the dinners for a new week</button></div></section>
+  <section class="card"><h3>Cook nights</h3><div id="cook"></div></section>
+  <section class="card"><h3>Planning day and grocery day</h3><div id="mealday"></div></section>
+  <section class="card"><h3>My 3 workouts</h3><div id="workouts"></div></section>
+</div>
+<script src="om.js"></script>
+<script>
+function render(){renderWS('grocery',$('#grocery'));renderWS('meals',$('#meals'));renderWS('cook',$('#cook'));renderWS('mealday',$('#mealday'));renderWS('workouts',$('#workouts'))}
+render();
+$('#clearDone').addEventListener('click',()=>{saveList('om:grocery',list('om:grocery').filter(x=>!x.done));renderWS('grocery',$('#grocery'))});
+$('#clearMeals').addEventListener('click',()=>{store.set('om:meals',{});renderWS('meals',$('#meals'))});
+</script>

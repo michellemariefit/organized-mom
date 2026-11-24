@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8">
+<base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Plan · The Organized Mom</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7a4f5a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="om.css">
+<style>.sec h3{margin-bottom:4px}.sec ul{margin:0;padding-left:18px;font-size:15px}.sec li{margin:2px 0}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:480px){.two{grid-template-columns:1fr}}</style>
+<div class="wrap">
+  <header class="page noprint"><a class="back" href="start.html">← Home</a><span class="eyebrow">Everything, once</span><h1>My plan on one page</h1><p class="lead">Print it, or screenshot it into your photos. It updates itself whenever you change something in the app.</p><div class="toolrow"><button class="pill play" onclick="window.print()">Print</button></div></header>
+  <h1 style="display:none" class="printonly">My Organized Life</h1>
+  <div id="out" style="display:flex;flex-direction:column;gap:12px"></div>
+</div>
+<script src="om.js"></script>
+<script>
+const li=a=>a.length?`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`:'<p class="note">Nothing yet.</p>';
+const as=aspects(), by=weekByDay(), m=store.get('om:meals',{}), w=store.get('om:workouts',{days:[]});
+let html='';
+html+=`<div class="card sec"><h3>My aspects, in order</h3>${li(as.map((a,i)=>{const s=sheet(a.id);const top=s.top.filter(Boolean);return `<b>${i+1}. ${esc(a.name)}</b>${top.length?`<br><small>Top 3: ${esc(top.join(' · '))}</small>`:''}`}))}</div>`;
+html+=`<div class="card sec"><h3>My week</h3><div class="two">${by.map((l,i)=>`<div><b>${WEEKDAYS_LONG[i]}</b>${li(l.map(e=>`${fmtTime(e.time)?fmtTime(e.time)+' ':''}${esc(e.label)}`))}</div>`).join('')}</div><p class="note">Every day: ${esc(list('om:daily').map(x=>x.text).join(' · '))||'—'}</p></div>`;
+html+=`<div class="card sec two"><div><h3>Morning${store.get('om:wake','')?' · up at '+fmtTime(store.get('om:wake','')):''}</h3>${li(list('om:morning').map(x=>esc(x.text)))}</div><div><h3>Evening</h3>${li(list('om:evening').map(x=>esc(x.text)))}</div></div>`;
+html+=`<div class="card sec"><h3>This week's dinners</h3>${li(WEEKDAYS_LONG.map((d,i)=>{const r=m[i]||{};return `<b>${d}:</b> ${esc([r.protein,r.carb,r.veg].filter(Boolean).join(', '))||'—'}`}))}<p class="note">Workouts: ${w.days.map(i=>WEEKDAYS_LONG[i]).join(', ')||'—'}${w.time?' at '+fmtTime(w.time):''}</p></div>`;
+html+=`<div class="card sec two"><div><h3>Grocery list</h3>${li(list('om:grocery').filter(x=>!x.done).map(x=>esc(x.text)))}</div><div><h3>Delegated</h3>${li(list('om:todos').filter(x=>x.delegate).map(x=>`${esc(x.text)}${x.to?' → '+esc(x.to):''}`))}</div></div>`;
+$('#out').innerHTML=html;
+</script>

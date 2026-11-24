@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<base target="_top">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Routines · The Organized Mom</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7a4f5a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Organized Mom">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="om.css">
+<div class="wrap">
+  <header class="page"><a class="back" href="start.html">← Home</a><span class="eyebrow">From Day 6</span><h1>Morning and evening</h1><p class="lead">In the order you do them. Batch what you can while you're already standing there.</p></header>
+  <section class="card"><h3>Morning</h3><div id="morning"></div></section>
+  <section class="card"><h3>Evening</h3><div id="evening"></div></section>
+  <section class="card soft"><h3>Down time</h3><div id="downtime"></div></section>
+</div>
+<script src="om.js"></script>
+<script>renderWS('morning',$('#morning'));renderWS('evening',$('#evening'));renderWS('downtime',$('#downtime'));</script>
