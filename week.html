@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="om.css">
 <div class="wrap">
   <header class="page"><a class="back" href="start.html">← Home</a><span class="eyebrow">The calendar</span><h1>My week</h1><p class="lead">Every recurring week. Workouts, meals and down time come from their own pages and show up here on their own.</p></header>
+  <section id="help"></section>
   <section class="card">
     <h3>Add something</h3>
     <form class="addform" id="add">
@@ -32,6 +33,7 @@
 const f=$('#add');
 f.day.innerHTML+=WEEKDAYS_LONG.map((d,i)=>`<option value="${i}">${d}</option>`).join('');
 f.tag.innerHTML=TAGS.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
+$('#help').innerHTML=helpHTML('week');
 f.addEventListener('submit',e=>{e.preventDefault();const w=week();w.push({id:uid(),day:+f.day.value,time:f.time.value,label:f.label.value.trim(),tag:f.tag.value});saveList('om:week',w);f.label.value='';f.time.value='';render();});
 function render(){
   const by=weekByDay(), td=(new Date().getDay()+6)%7;

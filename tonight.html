@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="om.css">
 <div class="wrap">
   <header class="page"><a class="back" href="start.html">← Home</a><span class="eyebrow">Note to self</span><h1 id="h">Tonight</h1><p class="lead">After you look at tomorrow's calendar. Think of everything you did today. Commend yourself for it. Be grateful for it.</p></header>
+  <section id="help"></section>
   <section class="card ws">
     <label>What I did today<textarea id="did" rows="5" placeholder="Everything you got done. Every moment with the kids, 5 minutes or 2 hours."></textarea></label>
     <label>What I'm grateful for<textarea id="grateful" rows="3" placeholder="Three things is plenty."></textarea></label>
@@ -24,6 +25,7 @@
 <script src="om.js"></script>
 <script>
 const d=TODAY, n={did:'',grateful:'',...notes()[d]};
+$('#help').innerHTML=helpHTML('tonight');
 $('#did').value=n.did;$('#grateful').value=n.grateful;
 document.addEventListener('input',e=>{if(e.target.id==='did'||e.target.id==='grateful'){n[e.target.id]=e.target.value;setNote(d,n)}});
 const tm=(new Date().getDay()+6)%7, tmi=(tm+1)%7, by=weekByDay();

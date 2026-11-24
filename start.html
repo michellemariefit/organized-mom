@@ -17,6 +17,7 @@
   </header>
   <section class="hero"><img src="images/michelle.jpg" alt=""><div class="tx"><span class="eyebrow">7 days with Michelle Marie</span><h1>A more organized, productive, healthy, fit and balanced life</h1><p>One day at a time. Everything you write is saved on your phone.</p></div></section>
   <section id="next"></section>
+  <section id="help"></section>
   <section id="dots" class="dots"></section>
   <section id="tonight"></section>
   <h2 class="also">My plan</h2>
@@ -40,6 +41,7 @@
 <script>
 function render(){
   const nd=nextDay(), dn=done();
+  $('#help').innerHTML=helpHTML('home');
   const d=DAYS[(nd||7)-1];
   $('#next').innerHTML=nd?`<div class="card"><span class="eyebrow">${nd===1&&!dn[1]?'Start here':'Next up'}</span><h2>Day ${nd}: ${esc(d.title)}</h2><p>${esc(d.sub)}</p><a class="go" href="day.html#${nd}">${nd===1?'Start Day 1':'Open Day '+nd} →</a></div>`
     :`<div class="card gold"><span class="eyebrow">All 7 days done</span><h2>Your life is in order.</h2><p>Now it's about keeping it that way. Your week, meals and routines are below. Every night, the note to self.</p><a class="go gold" href="week.html">Open my week →</a></div>`;
